@@ -1,0 +1,68 @@
+//templates/index.html
+<html>
+<head>
+<title>Python Flask Upload and display image</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 5px;
+      }
+</style>
+</head>
+<body>
+<p><h1 align="center"> HAKIKISHA MOTI </DETAILS></h1></p>
+<div class="container">
+<div class="row">
+    <h2>Select a file to upload</h2>
+    <p>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </p>
+    {% if filename %}
+        <div class=" picture1">
+            <img src="{{ url_for('display_image', filename=filename) }}">
+        </div>
+        <h1>Car_details</h1>
+        <table >
+            <tr>
+                <th>Registered_Owner</th>
+                <th>Car_Registration</th>
+                <th>Car_Color</th>
+                <th>Insuarance</th>
+            </tr>
+            <tr>
+              <th>{{item["Driver_Name"]}}</th>
+              <th>{{item["Number_plate"]}}</th>
+              <th>{{item["Color"]}}</th>
+              <th>{{item["Insuarance"]}}</th>
+
+            </tr>
+
+      </table>
+    {% endif %}
+    <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="file" class="form-control" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Submit" class="btn btn-info">
+        </p>
+    </form>
+</div>
+</div>
+</body>
+</html>
